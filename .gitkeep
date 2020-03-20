@@ -1,0 +1,3 @@
+# Ignore everything in this directory
+static/*
+# Except this file !.gitkeep
