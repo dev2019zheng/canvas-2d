@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="800" height="800">
+    您的浏览器不支持 Canvas
+  </canvas>
+
+  <script>
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+    var rowStartIndex = 10
+    // --------------
+    ctx.beginPath();
+    ctx.moveTo(50, rowStartIndex);
+    ctx.lineTo(150, rowStartIndex + 100);
+    ctx.lineTo(50, rowStartIndex + 100);
+    ctx.closePath();
+    ctx.fillStyle = '#ff7000';
+    ctx.fill();
+    ctx.strokeStyle = '#007fff';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.setLineDash([5, 5]);
+    ctx.stroke();
+    ctx.save()
+    // --------------
+    ctx.beginPath();
+    ctx.fillStyle = '#00ff00';
+    ctx.strokeStyle = '#0ff0ff';
+    ctx.rect(200, rowStartIndex, 100, 100);
+    ctx.fill();
+    ctx.strokeRect(320, rowStartIndex, 100, 100);
+    // clearRect 用于擦除指定矩形区域的像素颜色，等同于把早先的绘制效果都去除。
+    ctx.fillRect(440, rowStartIndex, 100, 100);
+    ctx.clearRect(460, rowStartIndex + 30, 30, 30);
+    // -----------------------
+    rowStartIndex += 190 // 圆心y值 200
+    // 绘制实心圆形
+    ctx.beginPath();
+    ctx.fillStyle = '#ff00ff';
+    ctx.strokeStyle = '#333';
+    ctx.arc(60, rowStartIndex, 50, 0, Math.PI * 2, true);
+    ctx.fill();
+    // 绘制空心半圆
+    ctx.beginPath();
+    ctx.fillStyle = '#ff00ff';
+    ctx.strokeStyle = '#333';
+    ctx.moveTo(150, rowStartIndex);
+    ctx.arc(200, rowStartIndex, 50, 0, Math.PI, false);
+    ctx.stroke();
+    //绘制圆弧，需要给出两个点的坐标，当前点与第一个点形成一条直线，第一个点与第二个点形成另一条直线，然后画出与这两根直线相切的弧线。
+    ctx.beginPath();
+    ctx.moveTo(300, rowStartIndex);
+    ctx.arcTo(350, rowStartIndex + 50, 400, rowStartIndex, 40);
+    ctx.lineTo(400, rowStartIndex);
+    ctx.stroke();
+
+    // ---------------------
+    rowStartIndex += 100
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.lineCap = 'rect';
+    ctx.lineJoin = 'round';
+    ctx.setLineDash([0, 0]);
+    ctx.fillStyle = '#0000ff';
+    ctx.fillText('Hello world', 100, rowStartIndex);
+    ctx.strokeStyle = '#888';
+    ctx.strokeText('Hello world', 100, rowStartIndex + 40);
+    ctx.font = 'Bold 20px Arial';
+    ctx.fillText('Hello world', 100, rowStartIndex + 80);
+    ctx.font = 'Bold 20px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Hello world', 100, rowStartIndex + 120);
+  </script>
+</body>
+
+</html>
