@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas-2D</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      cursor: none;
+      background: black;
+    }
+    #canvas {
+      background: linear-gradient(to bottom, #000000 0%, #5788fe 100%);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    var ctx = document.getElementById('canvas'),
+      content = ctx.getContext('2d'),
+      round = [],
+      WIDTH,
+      HEIGHT;
+
+    WIDTH = document.documentElement.clientWidth;
+    HEIGHT = document.documentElement.clientHeight;
+
+    ctx.width = WIDTH;
+    ctx.height = HEIGHT;
+
+    var initRoundPopulation = 200;
+    // 随机粒子
+    function Round_item(index, x, y) {
+      this.index = index;
+      this.x = x;
+      this.y = y;
+      this.r = Math.random() * 2 + 1;
+      this.alpha = (Math.floor(Math.random() * 10) + 1) * 0.05;
+      this.color = `rgb(255, 255, 255, ${this.alpha})`;
+    }
+
+    Round_item.prototype.draw = function() {
+      content.fillStyle = this.color;
+      content.shadowBlur = this.r * 2;
+      content.beginPath();
+      content.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+      content.closePath();
+      content.fill();
+    }
+    Round_item.prototype.move = function() {
+      this.y -= (0.15 + 2 * this.alpha); // 透明度高的更快
+      if (this.y <= -10) {
+        this.y = HEIGHT + 10;
+      }
+      this.draw();
+    };
+
+    function init() {
+      for (let i = 0; i < initRoundPopulation; i++) {
+        round[i] = new Round_item(i, Math.random() * WIDTH, Math.random() * HEIGHT);
+        round[i].draw();
+      }
+      animate();
+    }
+
+    function animate() {
+      content.clearRect(0, 0, WIDTH, HEIGHT);
+      for (var i in round) {
+        round[i].move();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    //
+    init();
+  </script>
+</body>
+
+</html>
