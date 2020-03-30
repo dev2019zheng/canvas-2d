@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #myCanvas {
+      border: 1px solid skyblue;
+      background: rgba(12, 30, 78, 1);
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="800" height="800">
+    您的浏览器不支持 Canvas
+  </canvas>
+
+  <script>
+    var _W = _H = 800,
+      grips = 200,
+      PI = Math.PI,
+      P0 = 0,
+      P1 = 0,
+      Z0 = 9;
+      Z1 = 3;
+    var canvas = document.getElementById('myCanvas');
+    canvas.width = _W
+    canvas.height = _H
+    var ctx = canvas.getContext('2d');
+    // --------------
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(0, 125, 255, 0.5)';
+    var gradient = ctx.createLinearGradient(100, 250, 200, 250);
+    gradient.addColorStop(0, 'rgba(19, 121, 200, 0.8)');
+    gradient.addColorStop(0.12, 'rgba(19, 121, 200, 0.8)');
+    gradient.addColorStop(0.30, 'rgba(26, 174, 202, 0.7)');
+    gradient.addColorStop(0.35, 'rgba(26, 174, 202, 0.9)');
+    gradient.addColorStop(0.55, 'rgba(16, 92, 193, 0.7)');
+    gradient.addColorStop(0.6, 'rgba(16, 92, 193, 0.8)');
+    gradient.addColorStop(0.8, 'rgba(26, 174, 202, 0.8)');
+    gradient.addColorStop(0.88, 'rgba(26, 174, 202, 0.8)');
+    gradient.addColorStop(1, 'rgba(19, 121, 200, 0.8)');
+    ctx.fillStyle = gradient;
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = 'rgba(32, 112, 193, 1)';
+    ctx.moveTo(100, 400)
+    ctx.lineTo(100, 100)
+    ctx.quadraticCurveTo(150, 124, 200, 100)
+    ctx.lineTo(200, 400)
+    ctx.quadraticCurveTo(150, 424, 100, 400)
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill()
+  </script>
+</body>
+
+</html>
